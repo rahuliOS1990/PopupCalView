@@ -14,7 +14,18 @@
     NSDate *strtDate;
     NSDateComponents *dC;
     NSCalendar *gregorian;
+    /*
+    IBOutlet UILabel *lblMon;
+    IBOutlet UILabel *lblTue;
+    IBOutlet UILabel *lblTue;
+    IBOutlet UILabel *lblTue;
+    IBOutlet UILabel *lblTue;
+    IBOutlet UILabel *lblTue;
+    IBOutlet UILabel *lblTue;
+    */
+    
 }
+
 
 @end
 
@@ -194,6 +205,7 @@
     NSDateComponents *components = [[NSDateComponents alloc] init];
     [components setDay:indexPath.row];
     
+
     // create a calendar
 
     
@@ -202,10 +214,24 @@
     dC=[gregorian components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit|NSWeekOfMonthCalendarUnit|NSWeekdayCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit) fromDate:newDate2];
     UILabel *lbl=(UILabel*)[cell viewWithTag:110];
     lbl.text=[NSString stringWithFormat:@"%d",dC.day];
+    
+    NSLog(@"farame  %@  offset of frame ",NSStringFromCGRect(cell.frame));
     return cell;
     
     
 }
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    int selected=indexPath.row%7;
+    UILabel *lbl=[labels objectAtIndex:selected];
+    NSLog(@"selected %@",lbl.text);
+}
+-(void)checkEventonCalendars
+{
+    
+}
+
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
