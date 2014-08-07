@@ -7,6 +7,9 @@
 //
 
 #import "ViewController.h"
+#import "CircleView.h"
+
+#import "CalView.h"
 
 @interface ViewController ()
 
@@ -18,6 +21,27 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+
+    
+}
+
+-(IBAction)btnEvent:(id)sender
+{
+
+    
+    CircleView *viewCirlce=[[CircleView alloc] initWithFrame:CGRectMake(100, 100, 10, 10)];
+    
+       [viewCirlce setBackgroundColor:[UIColor clearColor]];
+    [self.view addSubview:viewCirlce];
+
+    CalView *view=[[CalView alloc] initWithFrame:CGRectMake(10, 30, 100, 100)];
+   
+    [view setBackgroundColor:[UIColor clearColor]];
+   
+    [self.view addSubview:view];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning

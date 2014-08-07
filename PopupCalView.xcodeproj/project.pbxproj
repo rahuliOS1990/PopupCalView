@@ -21,6 +21,11 @@
 		9D6F454C199361C200008A86 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D6F452E199361C200008A86 /* UIKit.framework */; };
 		9D6F4554199361C200008A86 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9D6F4552199361C200008A86 /* InfoPlist.strings */; };
 		9D6F4556199361C200008A86 /* PopupCalViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D6F4555199361C200008A86 /* PopupCalViewTests.m */; };
+		9DBAB989199363D6009BCCFA /* CircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBAB988199363D6009BCCFA /* CircleView.m */; };
+		9DBAB98C19937291009BCCFA /* CalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBAB98B19937291009BCCFA /* CalView.m */; };
+		9DBAB98E19938C6F009BCCFA /* CalView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DBAB98D19938C6F009BCCFA /* CalView.xib */; };
+		9DBAB990199397A0009BCCFA /* CalCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DBAB98F199397A0009BCCFA /* CalCollectionCell.xib */; };
+		9DBAB99219939BF0009BCCFA /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DBAB99119939BF0009BCCFA /* Main_iPad.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +58,13 @@
 		9D6F4551199361C200008A86 /* PopupCalViewTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PopupCalViewTests-Info.plist"; sourceTree = "<group>"; };
 		9D6F4553199361C200008A86 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9D6F4555199361C200008A86 /* PopupCalViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PopupCalViewTests.m; sourceTree = "<group>"; };
+		9DBAB987199363D6009BCCFA /* CircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleView.h; sourceTree = "<group>"; };
+		9DBAB988199363D6009BCCFA /* CircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleView.m; sourceTree = "<group>"; };
+		9DBAB98A19937291009BCCFA /* CalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalView.h; sourceTree = "<group>"; };
+		9DBAB98B19937291009BCCFA /* CalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalView.m; sourceTree = "<group>"; };
+		9DBAB98D19938C6F009BCCFA /* CalView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalView.xib; sourceTree = "<group>"; };
+		9DBAB98F199397A0009BCCFA /* CalCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalCollectionCell.xib; sourceTree = "<group>"; };
+		9DBAB99119939BF0009BCCFA /* Main_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPad.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +94,7 @@
 		9D6F451E199361C200008A86 = {
 			isa = PBXGroup;
 			children = (
+				9DBAB98F199397A0009BCCFA /* CalCollectionCell.xib */,
 				9D6F4530199361C200008A86 /* PopupCalView */,
 				9D6F454F199361C200008A86 /* PopupCalViewTests */,
 				9D6F4529199361C200008A86 /* Frameworks */,
@@ -114,11 +127,17 @@
 			children = (
 				9D6F4539199361C200008A86 /* AppDelegate.h */,
 				9D6F453A199361C200008A86 /* AppDelegate.m */,
-				9D6F453C199361C200008A86 /* Main.storyboard */,
+				9DBAB99119939BF0009BCCFA /* Main_iPad.storyboard */,
 				9D6F453F199361C200008A86 /* ViewController.h */,
 				9D6F4540199361C200008A86 /* ViewController.m */,
 				9D6F4542199361C200008A86 /* Images.xcassets */,
+				9D6F453C199361C200008A86 /* Main.storyboard */,
 				9D6F4531199361C200008A86 /* Supporting Files */,
+				9DBAB987199363D6009BCCFA /* CircleView.h */,
+				9DBAB988199363D6009BCCFA /* CircleView.m */,
+				9DBAB98A19937291009BCCFA /* CalView.h */,
+				9DBAB98B19937291009BCCFA /* CalView.m */,
+				9DBAB98D19938C6F009BCCFA /* CalView.xib */,
 			);
 			path = PopupCalView;
 			sourceTree = "<group>";
@@ -231,6 +250,9 @@
 				9D6F4543199361C200008A86 /* Images.xcassets in Resources */,
 				9D6F4535199361C200008A86 /* InfoPlist.strings in Resources */,
 				9D6F453E199361C200008A86 /* Main.storyboard in Resources */,
+				9DBAB98E19938C6F009BCCFA /* CalView.xib in Resources */,
+				9DBAB99219939BF0009BCCFA /* Main_iPad.storyboard in Resources */,
+				9DBAB990199397A0009BCCFA /* CalCollectionCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +271,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DBAB989199363D6009BCCFA /* CircleView.m in Sources */,
+				9DBAB98C19937291009BCCFA /* CalView.m in Sources */,
 				9D6F4541199361C200008A86 /* ViewController.m in Sources */,
 				9D6F453B199361C200008A86 /* AppDelegate.m in Sources */,
 				9D6F4537199361C200008A86 /* main.m in Sources */,
@@ -381,7 +405,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PopupCalView/PopupCalView-Prefix.pch";
 				INFOPLIST_FILE = "PopupCalView/PopupCalView-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -394,7 +420,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PopupCalView/PopupCalView-Prefix.pch";
 				INFOPLIST_FILE = "PopupCalView/PopupCalView-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -460,6 +488,7 @@
 				9D6F455B199361C200008A86 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9D6F455C199361C200008A86 /* Build configuration list for PBXNativeTarget "PopupCalViewTests" */ = {
 			isa = XCConfigurationList;
@@ -468,6 +497,7 @@
 				9D6F455E199361C200008A86 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
