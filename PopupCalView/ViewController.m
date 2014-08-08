@@ -37,7 +37,7 @@
 
     CalView *view=[[CalView alloc] initWithFrame:CGRectMake(10, 30,     371    , 300)];
    
-    [view setBackgroundColor:[UIColor clearColor]];
+    [view setBackgroundColor:[UIColor darkGrayColor]];
    
     [self.view addSubview:view];
     

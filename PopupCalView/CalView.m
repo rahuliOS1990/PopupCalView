@@ -155,7 +155,12 @@
     NSLog(@"start dateeee ******* %@   %@",dCForMonth,[gregorian dateFromComponents:dCForMonth]);
     NSString *monthName = [[df monthSymbols] objectAtIndex:(month-1)];
     lblLeftWeek.text=monthName;
+    
     [collectionView reloadData];
+    
+    
+    monthName=[[df monthSymbols] objectAtIndex: (int)dateComponentEndWeek.month-1];
+    lblRightWeek.text=monthName;
 
     
 }
@@ -227,22 +232,35 @@
     
     
 
+
     NSString *month=[[df monthSymbols] objectAtIndex:dC.month-1];
     if (![lblLeftWeek.text isEqualToString:month]) {
-        lblRightWeek.text=month;
+      //  lblRightWeek.text=month;
     }
     cell.lblWeekDay.text=[[[df weekdaySymbols] objectAtIndex:dC.weekday-1] substringToIndex:3];
     cell.lblDay.text=[NSString stringWithFormat:@"%d",dC.day];
+    [cell.lblDay setBackgroundColor:[UIColor clearColor]];
+
+    
+    cell.lblDay.textColor=[UIColor whiteColor];
+    
+    cell.lblWeekDay.textColor=[UIColor whiteColor];
     
     BOOL checkSameDay=[self isSameDay:[NSDate date] otherDay:newDate2];
     if (checkSameDay) {
         [cell.lblDay setBackgroundColor:[UIColor grayColor]];
         cell.lblDay.textColor=[UIColor whiteColor];
-    }else
+    }
+    else if (![self isSameMonth:[NSDate date] otherMonth:newDate2])
     {
         [cell.lblDay setBackgroundColor:[UIColor clearColor]];
-        cell.lblDay.textColor=[UIColor blackColor];
+        cell.lblDay.textColor=[UIColor colorWithRed:187/255.0f green:187/255.0f blue:187/255.0f alpha:1.0f];
+
+        cell.lblWeekDay.textColor=[UIColor colorWithRed:187/255.0f green:187/255.0f blue:187/255.0f alpha:1.0f];
+    
     }
+    
+  
     
     
     
@@ -373,6 +391,18 @@
     
     return [comp1 day]   == [comp2 day] &&
     [comp1 month] == [comp2 month] &&
+    [comp1 year]  == [comp2 year];
+}
+
+-(BOOL)isSameMonth:(NSDate*)date1 otherMonth:(NSDate*)date2
+{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    
+    unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
+    NSDateComponents* comp1 = [calendar components:unitFlags fromDate:date1];
+    NSDateComponents* comp2 = [calendar components:unitFlags fromDate:date2];
+    
+    return  [comp1 month] == [comp2 month] &&
     [comp1 year]  == [comp2 year];
 }
 
