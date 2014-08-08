@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-//typedef void (^LSCalViewBlock) (NSArray *arrAlerts);
+@protocol CalViewDataSource <NSObject>
+
+-(NSArray*)alertArrayForCalWeekView;
+
+@end
 
 
 
@@ -21,7 +25,9 @@
     IBOutlet UILabel *lblRightWeek;
 }
 
+@property (weak, nonatomic) id<CalViewDataSource> datasource;
 
+-(void)design;
 
 
 

@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CalView.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController<CalViewDataSource>
+
+
+
+
+
 
 @end

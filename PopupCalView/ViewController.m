@@ -8,8 +8,8 @@
 
 #import "ViewController.h"
 #import "CircleView.h"
+#import "LSAlert.h"
 
-#import "CalView.h"
 
 @interface ViewController ()
 
@@ -30,6 +30,7 @@
 {
 
     
+    
     CircleView *viewCirlce=[[CircleView alloc] initWithFrame:CGRectMake(100, 100, 10, 10)];
     
        [viewCirlce setBackgroundColor:[UIColor clearColor]];
@@ -38,11 +39,30 @@
     CalView *view=[[CalView alloc] initWithFrame:CGRectMake(110, 130,370, 300)];
    
     [view setBackgroundColor:[UIColor darkGrayColor]];
-   
+    view.datasource=self;
+    // [view design];
     [self.view addSubview:view];
     
     
 }
+
+-(NSArray *)alertArrayForCalWeekView
+{
+    LSAlert *alert=[[LSAlert alloc] init];
+    alert.date=[NSDate date];
+    
+        NSDateComponents *dateComponents = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit|NSWeekOfMonthCalendarUnit|NSWeekdayCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit) fromDate:alert.date];
+    dateComponents.day=1;
+    
+    LSAlert *alert1=[[LSAlert alloc] init];
+    alert1.date=[[NSCalendar currentCalendar] dateFromComponents:dateComponents];
+    
+    
+    NSArray *arrAlers=[[NSArray alloc] initWithObjects:alert,alert1 ,nil];
+    
+    return arrAlers;
+}
+
 
 - (void)didReceiveMemoryWarning
 {

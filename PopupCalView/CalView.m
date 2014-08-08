@@ -16,6 +16,7 @@
 
 @interface CalView ()
 {
+    
     BOOL isDraw;
     NSDate *strtDate;
     NSDateComponents *dC;
@@ -24,6 +25,7 @@
     
 }
 
+@property(nonatomic,strong)NSArray *arrEvents;
 
 @end
 
@@ -45,7 +47,7 @@
         
         
         
-        [self design];
+       
     }
     return self;
 }
@@ -53,6 +55,7 @@
 
 -(void)design
 {
+   
     
     dateformatter= [[NSDateFormatter alloc] init] ;
     
@@ -63,7 +66,7 @@
     
     NSDateComponents *dateComponents = [gregorian components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit|NSWeekOfMonthCalendarUnit|NSWeekdayCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit) fromDate:date];
     
-    
+    _arrEvents=[self.datasource alertArrayForCalWeekView];
     
     
     
@@ -152,11 +155,14 @@
     // Drawing code
     
     
-    //[self design];
+    [self design];
     
     
 }
 
+
+
+#pragma mark- Collection View Datasource & Delegates
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -209,6 +215,7 @@
     cell.lblDay.text=[NSString stringWithFormat:@"%d",dC.day];
     [cell.lblDay setBackgroundColor:[UIColor clearColor]];
     
+    NSLog(@"print alerts %@",_arrEvents);
     
     cell.lblDay.textColor=[UIColor whiteColor];
     
