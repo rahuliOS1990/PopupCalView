@@ -36,11 +36,6 @@
         // Initialization code
         
         
-        
-        
-        
-        
-        
         NSArray *arrObjects=[[NSBundle mainBundle] loadNibNamed:@"CalView" owner:self options:nil];
         self=[arrObjects objectAtIndex:0];
         frame.size.width=self.frame.size.width;
@@ -72,14 +67,7 @@
     
     
     
-    NSDateFormatter *df = [[NSDateFormatter alloc] init] ;
-    
-    
-    
-    
-    
-    
-    
+   
     
     
     NSDateComponents *dateComponentStartWeek=[[NSDateComponents  alloc] init];
@@ -107,14 +95,14 @@
     NSInteger week=[dCForMonth weekOfMonth];
     NSInteger month = [dCForMonth month];
     
-    NSString *monthName = [[df monthSymbols] objectAtIndex:(month-1)];
-    lblLeftWeek.text=monthName;
+    NSString *monthName = [[dateformatter monthSymbols] objectAtIndex:(month-1)];
+    lblLeftWeek.text=monthName.uppercaseString;
     
     
     
     
-    monthName=[[df monthSymbols] objectAtIndex: (int)dateComponentEndWeek.month-1];
-    lblRightWeek.text=monthName;
+    monthName=[[dateformatter monthSymbols] objectAtIndex: (int)dateComponentEndWeek.month-1];
+    lblRightWeek.text=monthName.uppercaseString;
     
     UIFont *fontMonth=[UIFont fontWithName:@"AvenirNext-Medium" size:15.0f];
     NSDictionary *attr = @{NSFontAttributeName: fontMonth};
@@ -134,7 +122,7 @@
     
     
     
-    monthName=[[df monthSymbols] objectAtIndex:dateComponents.month-1];
+    monthName=[[dateformatter monthSymbols] objectAtIndex:dateComponents.month-1];
     if ([lblLeftWeek.text isEqualToString:monthName]) {
         
         [lblLeftWeek setBackgroundColor:[UIColor colorWithRed:153/255.0f green:204/255.0f blue:0/255.0f alpha:1.0f]];
@@ -202,18 +190,12 @@
         
     }
     
-   
-  
-    
-    
-    
-    
     
     NSDateComponents *components = [[NSDateComponents alloc] init];
     [components setDay:indexPath.row];
     
     
-    // create a calendar
+ 
     
     
     NSDate *newDate2 = [gregorian dateByAddingComponents:components toDate:strtDate options:0];
@@ -223,11 +205,6 @@
     
     
     
-   // NSString *month=[[dateformatter monthSymbols] objectAtIndex:dC.month-1];
-    
-   // if (![lblLeftWeek.text isEqualToString:month]) {
-        //  lblRightWeek.text=month;
-    //}
     cell.lblWeekDay.text=[[[dateformatter weekdaySymbols] objectAtIndex:dC.weekday-1] substringToIndex:3];
     cell.lblDay.text=[NSString stringWithFormat:@"%d",dC.day];
     [cell.lblDay setBackgroundColor:[UIColor clearColor]];
@@ -239,8 +216,9 @@
     
     BOOL checkSameDay=[self isSameDay:[NSDate date] otherDay:newDate2];
     if (checkSameDay) {
-        [cell.lblDay setBackgroundColor:[UIColor grayColor]];
-        cell.lblDay.textColor=[UIColor whiteColor];
+        cell.lblDay.layer.cornerRadius=4.0f;
+        [cell.lblDay setBackgroundColor:[UIColor whiteColor]];
+        cell.lblDay.textColor=APP_COLOR;
     }
     else if (![self isSameMonth:[NSDate date] otherMonth:newDate2])
     {

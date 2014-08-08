@@ -8,16 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+//typedef void (^LSCalViewBlock) (NSArray *arrAlerts);
+
 
 
 @interface CalView : UIView<UICollectionViewDataSource,UICollectionViewDelegate>
 
 {
- IBOutlet   UICollectionView *collectionView;
+    IBOutlet   UICollectionView *collectionView;
     
     IBOutlet UILabel *lblLeftWeek;
     IBOutlet UILabel *lblRightWeek;
 }
+
+
 
 
 

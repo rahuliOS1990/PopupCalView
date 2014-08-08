@@ -28,6 +28,7 @@
 		9DBAB99219939BF0009BCCFA /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DBAB99119939BF0009BCCFA /* Main_iPad.storyboard */; };
 		9DC2DA561994A2950074CCD7 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DC2DA551994A2950074CCD7 /* EventKit.framework */; };
 		9DC2DA5C1994BA690074CCD7 /* LSCalCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC2DA5B1994BA690074CCD7 /* LSCalCollectionCell.m */; };
+		9DC2DA5F19950F310074CCD7 /* LSAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC2DA5E19950F310074CCD7 /* LSAlert.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,8 @@
 		9DC2DA551994A2950074CCD7 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		9DC2DA5A1994BA690074CCD7 /* LSCalCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSCalCollectionCell.h; sourceTree = "<group>"; };
 		9DC2DA5B1994BA690074CCD7 /* LSCalCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSCalCollectionCell.m; sourceTree = "<group>"; };
+		9DC2DA5D19950F310074CCD7 /* LSAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSAlert.h; path = PopupCalView/LSAlert.h; sourceTree = "<group>"; };
+		9DC2DA5E19950F310074CCD7 /* LSAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSAlert.m; path = PopupCalView/LSAlert.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +103,8 @@
 		9D6F451E199361C200008A86 = {
 			isa = PBXGroup;
 			children = (
+				9DC2DA5D19950F310074CCD7 /* LSAlert.h */,
+				9DC2DA5E19950F310074CCD7 /* LSAlert.m */,
 				9DC2DA5A1994BA690074CCD7 /* LSCalCollectionCell.h */,
 				9DC2DA5B1994BA690074CCD7 /* LSCalCollectionCell.m */,
 				9DBAB98F199397A0009BCCFA /* CalCollectionCell.xib */,
@@ -281,6 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9DBAB989199363D6009BCCFA /* CircleView.m in Sources */,
+				9DC2DA5F19950F310074CCD7 /* LSAlert.m in Sources */,
 				9DBAB98C19937291009BCCFA /* CalView.m in Sources */,
 				9D6F4541199361C200008A86 /* ViewController.m in Sources */,
 				9DC2DA5C1994BA690074CCD7 /* LSCalCollectionCell.m in Sources */,
