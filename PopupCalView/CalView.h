@@ -13,11 +13,13 @@
 {
  IBOutlet   UICollectionView *collectionView;
     IBOutletCollection(UILabel) NSArray *labels;
+    
 }
 
 
 
 -(void)design;
+
 
 
 @end

@@ -7,6 +7,9 @@
 //
 
 #import "CalView.h"
+#import "AppDelegate.h"
+#import "CircleView.h"
+
 
 @interface CalView ()
 {
@@ -14,15 +17,6 @@
     NSDate *strtDate;
     NSDateComponents *dC;
     NSCalendar *gregorian;
-    /*
-    IBOutlet UILabel *lblMon;
-    IBOutlet UILabel *lblTue;
-    IBOutlet UILabel *lblTue;
-    IBOutlet UILabel *lblTue;
-    IBOutlet UILabel *lblTue;
-    IBOutlet UILabel *lblTue;
-    IBOutlet UILabel *lblTue;
-    */
     
 }
 
@@ -37,7 +31,8 @@
     if (self) {
               // Initialization code
         
-        
+
+      
 
         collectionView.pagingEnabled=YES;
         
@@ -202,6 +197,14 @@
                 
     
     }
+    
+    int selected=indexPath.row%7;
+    UILabel *lblWeekDay=[labels objectAtIndex:selected];
+    NSLog(@"selected %@",lblWeekDay.text);
+    
+    
+    
+    
     NSDateComponents *components = [[NSDateComponents alloc] init];
     [components setDay:indexPath.row];
     
@@ -215,6 +218,30 @@
     UILabel *lbl=(UILabel*)[cell viewWithTag:110];
     lbl.text=[NSString stringWithFormat:@"%d",dC.day];
     
+    
+    NSInteger numberOfEvents=[self numberOfEventinCalendarOnDate:dC];
+    
+    switch (numberOfEvents) {
+        case 0:
+            
+            break;
+         case 1:
+            [self addCircleWithFrame:lblWeekDay.frame numberOfCircle:numberOfEvents];
+            break;
+        case 2:
+                        [self addCircleWithFrame:lblWeekDay.frame numberOfCircle:numberOfEvents];
+            break;
+        case 3:
+                        [self addCircleWithFrame:lblWeekDay.frame numberOfCircle:numberOfEvents];
+            break;
+            
+        default:
+                        [self addCircleWithFrame:lblWeekDay.frame numberOfCircle:3];
+            break;
+    }
+    NSLog(@"number of events %d",numberOfEvents);
+
+    
     NSLog(@"farame  %@  offset of frame ",NSStringFromCGRect(cell.frame));
     return cell;
     
@@ -223,12 +250,43 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    int selected=indexPath.row%7;
-    UILabel *lbl=[labels objectAtIndex:selected];
-    NSLog(@"selected %@",lbl.text);
+    
+    
+    
+    
 }
--(void)checkEventonCalendars
+-(NSInteger)numberOfEventinCalendarOnDate:(NSDateComponents*)dateComponenets
 {
+    
+    AppDelegate *del=(AppDelegate*)[[UIApplication sharedApplication] delegate];
+    
+    [dateComponenets setHour:0];
+    [dateComponenets setTimeZone:[NSTimeZone defaultTimeZone]];
+    
+    NSLog(@"print date %@",[gregorian dateFromComponents:dateComponenets]);
+    
+
+    
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    [components setHour:23];
+    [components setMinute:59];
+    
+    
+    // create a calendar
+    
+    
+    NSDate *endDate = [gregorian dateByAddingComponents:components toDate:[gregorian dateFromComponents:dateComponenets] options:0];
+   
+    
+    NSPredicate *predicate = [del.eventStore predicateForEventsWithStartDate:[gregorian dateFromComponents:dateComponenets]
+                                                                 endDate:endDate
+                                                               calendars:nil];
+    
+    // Fetch all events that match the predicate
+    NSArray *events = [del.eventStore eventsMatchingPredicate:predicate];
+    
+    return events.count;
+
     
 }
 
@@ -242,5 +300,30 @@
 }
 
 
+#pragma mark- Add Circle
+
+-(void)addCircleWithFrame:(CGRect)frame numberOfCircle:(NSInteger)count
+{
+   NSInteger circleHeight=10;
+    NSInteger circleWidth=10;
+    NSInteger width=frame.size.width;
+    NSInteger startXaxis=frame.origin.x+(width- count*circleWidth)/2;
+    NSInteger startYaxis=frame.origin.y-13;
+    
+    while (count!=0) {
+       
+        CircleView *viewCirlce=[[CircleView alloc] initWithFrame:CGRectMake(startXaxis,startYaxis , circleWidth, circleHeight)];
+        
+        [viewCirlce setBackgroundColor:[UIColor clearColor]];
+        [self addSubview:viewCirlce];
+        count--;
+
+        startXaxis+=circleWidth;
+        
+    }
+    
+    
+
+}
 
 @end

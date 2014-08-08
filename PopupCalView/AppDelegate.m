@@ -13,9 +13,39 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    _eventStore = [[EKEventStore alloc] init];
+    
+    [_eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
+        /* This code will run when uses has made his/her choice */
+        
+        if (error)
+        {
+            // display error message here
+            NSLog(@"errrot fsdfsd");
+        }
+        else if (!granted)
+        {
+            NSLog(@"denied");
+            // display access denied error message here
+        }
+        else
+        {
+            NSLog(@"access granteed");
+            // access granted
+            [_eventStore refreshSourcesIfNecessary];
+            
+            for (EKCalendar *calendar in _eventStore.calendars) {
+                NSLog(@"calendar type %d %@", calendar.type,calendar.title);
+                NSLog(@"calendart allow content %d",calendar.allowsContentModifications);
+            }
+        }
+        
+        
+    }];
+
     return YES;
 }
-							
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
