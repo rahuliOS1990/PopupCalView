@@ -35,7 +35,7 @@
        [viewCirlce setBackgroundColor:[UIColor clearColor]];
    // [self.view addSubview:viewCirlce];
 
-    CalView *view=[[CalView alloc] initWithFrame:CGRectMake(10, 30,     371    , 300)];
+    CalView *view=[[CalView alloc] initWithFrame:CGRectMake(110, 130,370, 300)];
    
     [view setBackgroundColor:[UIColor darkGrayColor]];
    

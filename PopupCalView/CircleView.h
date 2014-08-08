@@ -10,4 +10,5 @@
 
 @interface CircleView : UIView
 
++(CircleView*)circleViewWithFrame:(CGRect)frame andFillColor:(UIColor*)color;
 @end

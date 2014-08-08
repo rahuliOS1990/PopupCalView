@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 AgileMobileDev. All rights reserved.
 //
 
+#define APP_COLOR [UIColor colorWithRed:153/255.0f green:204/255.0f blue:0/255.0f alpha:1.0f]
+
 #import "CalView.h"
 #import "AppDelegate.h"
 #import "CircleView.h"
@@ -18,6 +20,7 @@
     NSDate *strtDate;
     NSDateComponents *dC;
     NSCalendar *gregorian;
+    NSDateFormatter *dateformatter;
     
 }
 
@@ -30,21 +33,22 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-              // Initialization code
+        // Initialization code
         
-
-      
-
-        collectionView.pagingEnabled=YES;
         
-    
+        
+        
+        
+        
         
         NSArray *arrObjects=[[NSBundle mainBundle] loadNibNamed:@"CalView" owner:self options:nil];
         self=[arrObjects objectAtIndex:0];
-        
+        frame.size.width=self.frame.size.width;
+        frame.size.height=self.frame.size.height;
+        [self setFrame:frame];
         [collectionView registerNib:[UINib nibWithNibName:@"CalCollectionCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"CalViewCollectionCell"];
-    
-
+        
+        
         
         [self design];
     }
@@ -54,78 +58,28 @@
 
 -(void)design
 {
-    /*
-    NSDate *date = [NSDate date];
-    NSCalendar *gregorian = [NSCalendar currentCalendar];
-    NSDateComponents *dateComponents = [gregorian components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit) fromDate:date];
-    NSInteger month = [dateComponents month];
     
-    NSInteger week=[dateComponents week];
-    
-    NSDateFormatter *df = [[NSDateFormatter alloc] init] ;
-    NSString *monthName = [[df monthSymbols] objectAtIndex:(month-1)];
-    UIFont *fontMonth=[UIFont fontWithName:@"AvenirNext-Medium" size:15.0f];
-    NSDictionary *attr = @{NSFontAttributeName: fontMonth};
-    
-    NSString *strWeek=[[df weekdaySymbols] objectAtIndex:(week-1)];
-    
-    NSLog(@"week no, %d ster week %@",week,strWeek);
-    
-    
-    
-    CGRect frameMonth=[monthName boundingRectWithSize:CGSizeMake(3000, 20) options:NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin attributes:attr context:nil];
-    NSLog(@"frame monteh %@",NSStringFromCGRect(frameMonth));
-    isDraw=YES;
-    //[self drawRect:frameMonth];
-    
-    CGRect backgroundLabel=frameMonth;
-    backgroundLabel.size.width+=10;
-    
-           // Draw whatever you like
-        UIBezierPath *ballBezierPath = [UIBezierPath bezierPathWithRect:backgroundLabel];
-        [[UIColor whiteColor] setStroke];
-        [[UIColor greenColor] setFill]; // Green here to show the black area
-        [ballBezierPath stroke];
-        [ballBezierPath fill];
- 
-    frameMonth.origin.x+=8;
-    
-    UILabel *lbl=[[UILabel alloc] initWithFrame:frameMonth];
-    lbl.text=monthName;
-    lbl.font=fontMonth;
-    lbl.textColor=[UIColor whiteColor];
-    [self addSubview:lbl];
-    
-    
-   // CGRect box = CGRectInset(self.bounds, self.bounds.size.width * 0.1f, self.bounds.size.height * 0.1f);
-   
-    
-    */
-
+    dateformatter= [[NSDateFormatter alloc] init] ;
     
     NSDate *date = [NSDate date];
     gregorian = [NSCalendar currentCalendar];
     [gregorian setTimeZone:[NSTimeZone defaultTimeZone]];
     
-
+    
     NSDateComponents *dateComponents = [gregorian components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit|NSWeekOfMonthCalendarUnit|NSWeekdayCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit) fromDate:date];
     
-   
+    
     
     
     
     NSDateFormatter *df = [[NSDateFormatter alloc] init] ;
-
-    UIFont *fontMonth=[UIFont fontWithName:@"AvenirNext-Medium" size:15.0f];
-    NSDictionary *attr = @{NSFontAttributeName: fontMonth};
     
     
     
-    NSInteger day=[dateComponents weekday];
     
-    NSString *strday=[[df weekdaySymbols] objectAtIndex:(day-1)];
     
-   // NSLog(@"week no, %d ster week %@",week,strday);
+    
+    
     
     
     NSDateComponents *dateComponentStartWeek=[[NSDateComponents  alloc] init];
@@ -133,36 +87,72 @@
     [dateComponentStartWeek setWeekOfMonth:dateComponents.weekOfMonth];
     [dateComponentStartWeek setMonth:dateComponents.month];
     [dateComponentStartWeek setYear:dateComponents.year];
-    [dateComponentStartWeek setHour:dateComponents.hour];
-    [dateComponentStartWeek setMinute:dateComponents.minute];
+    [dateComponentStartWeek setHour:00];
+    [dateComponentStartWeek setMinute:1];
     
     
     NSDateComponents *componentsToAdd = [[NSDateComponents alloc] init] ;
     
     [componentsToAdd setDay:14];
     
-    NSDate *newDate2 = [gregorian dateByAddingComponents:componentsToAdd toDate:[gregorian dateFromComponents:dateComponentStartWeek] options:0];
+    NSDate *endDate = [gregorian dateByAddingComponents:componentsToAdd toDate:[gregorian dateFromComponents:dateComponentStartWeek] options:0];
     
-    NSDateComponents *dateComponentEndWeek=[gregorian components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit|NSWeekOfMonthCalendarUnit|NSWeekdayCalendarUnit) fromDate:newDate2];
+    NSDateComponents *dateComponentEndWeek=[gregorian components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit|NSWeekOfMonthCalendarUnit|NSWeekdayCalendarUnit) fromDate:endDate];
     
     strtDate=[gregorian dateFromComponents:dateComponentStartWeek];
-    NSLog(@"date start %@ date end %@",[gregorian dateFromComponents:dateComponentStartWeek],[gregorian dateFromComponents:dateComponentEndWeek]);
+    
     
     NSDateComponents *dCForMonth=[gregorian components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit|NSWeekOfMonthCalendarUnit|NSWeekdayCalendarUnit) fromDate:strtDate];
     
-     NSInteger week=[dCForMonth weekOfMonth];
+    NSInteger week=[dCForMonth weekOfMonth];
     NSInteger month = [dCForMonth month];
-    NSLog(@"start dateeee ******* %@   %@",dCForMonth,[gregorian dateFromComponents:dCForMonth]);
+    
     NSString *monthName = [[df monthSymbols] objectAtIndex:(month-1)];
     lblLeftWeek.text=monthName;
     
-    [collectionView reloadData];
+    
     
     
     monthName=[[df monthSymbols] objectAtIndex: (int)dateComponentEndWeek.month-1];
     lblRightWeek.text=monthName;
-
     
+    UIFont *fontMonth=[UIFont fontWithName:@"AvenirNext-Medium" size:15.0f];
+    NSDictionary *attr = @{NSFontAttributeName: fontMonth};
+    
+    CGRect frameMonth=[lblLeftWeek.text boundingRectWithSize:CGSizeMake(3000, 20) options:NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin attributes:attr context:nil];
+    
+    CGRect leftWeekFrame=lblLeftWeek.frame;
+    leftWeekFrame.size.width=frameMonth.size.width+17;
+    [lblLeftWeek setFrame:leftWeekFrame];
+    
+    
+    frameMonth=[lblRightWeek.text boundingRectWithSize:CGSizeMake(3000, 20) options:NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin attributes:attr context:nil];
+    CGRect rightWeekFrame=lblRightWeek.frame;
+    rightWeekFrame.size.width=frameMonth.size.width+17;
+    rightWeekFrame.origin.x=self.frame.size.width-(frameMonth.size.width+17);
+    [lblRightWeek setFrame:rightWeekFrame];
+    
+    
+    
+    monthName=[[df monthSymbols] objectAtIndex:dateComponents.month-1];
+    if ([lblLeftWeek.text isEqualToString:monthName]) {
+        
+        [lblLeftWeek setBackgroundColor:[UIColor colorWithRed:153/255.0f green:204/255.0f blue:0/255.0f alpha:1.0f]];
+        [lblRightWeek setBackgroundColor:[UIColor lightGrayColor]];
+        
+    }
+    else
+    {
+        [lblRightWeek setBackgroundColor:[UIColor colorWithRed:153/255.0f green:204/255.0f blue:0/255.0f alpha:1.0f]];
+        [lblLeftWeek setBackgroundColor:[UIColor lightGrayColor]];
+    }
+    
+    lblRightWeek= (UILabel*)[self roundCornersOnView:lblRightWeek onTopLeft:YES topRight:NO bottomLeft:YES bottomRight:NO radius:4.0f];
+    lblLeftWeek=(UILabel*)[self roundCornersOnView:lblLeftWeek onTopLeft:NO topRight:YES bottomLeft:NO bottomRight:YES radius:4.0f];
+    // lblLeftWeek.layer.cornerRadius=4.0f;
+    // lblRightWeek.layer.cornerRadius=4.0f;
+    
+    [collectionView reloadData];
 }
 
 
@@ -172,10 +162,10 @@
 - (void)drawRect:(CGRect)rect
 {
     // Drawing code
-
+    
     
     //[self design];
-   
+    
     
 }
 
@@ -188,9 +178,9 @@
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     if (strtDate) {
-      
-    
-    return 14;
+        
+        
+        return 14;
     }
     else
     {
@@ -207,14 +197,14 @@
         
         NSArray *arrObjects=[[NSBundle mainBundle] loadNibNamed:@"CalCollectionCell" owner:self options:nil];
         cell=[arrObjects objectAtIndex:0];
-
-                
-    
+        
+        
+        
     }
     
     int selected=indexPath.row%7;
     UILabel *lblWeekDay=[labels objectAtIndex:selected];
-    NSLog(@"selected %@",lblWeekDay.text);
+    
     
     
     
@@ -222,25 +212,25 @@
     NSDateComponents *components = [[NSDateComponents alloc] init];
     [components setDay:indexPath.row];
     
- NSDateFormatter *df = [[NSDateFormatter alloc] init] ;
+    
     // create a calendar
-
+    
     
     NSDate *newDate2 = [gregorian dateByAddingComponents:components toDate:strtDate options:0];
-
+    
     dC=[gregorian components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit|NSWeekOfMonthCalendarUnit|NSWeekdayCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit) fromDate:newDate2];
     
     
-
-
-    NSString *month=[[df monthSymbols] objectAtIndex:dC.month-1];
+    
+    
+    NSString *month=[[dateformatter monthSymbols] objectAtIndex:dC.month-1];
     if (![lblLeftWeek.text isEqualToString:month]) {
-      //  lblRightWeek.text=month;
+        //  lblRightWeek.text=month;
     }
-    cell.lblWeekDay.text=[[[df weekdaySymbols] objectAtIndex:dC.weekday-1] substringToIndex:3];
+    cell.lblWeekDay.text=[[[dateformatter weekdaySymbols] objectAtIndex:dC.weekday-1] substringToIndex:3];
     cell.lblDay.text=[NSString stringWithFormat:@"%d",dC.day];
     [cell.lblDay setBackgroundColor:[UIColor clearColor]];
-
+    
     
     cell.lblDay.textColor=[UIColor whiteColor];
     
@@ -255,12 +245,12 @@
     {
         [cell.lblDay setBackgroundColor:[UIColor clearColor]];
         cell.lblDay.textColor=[UIColor colorWithRed:187/255.0f green:187/255.0f blue:187/255.0f alpha:1.0f];
-
+        
         cell.lblWeekDay.textColor=[UIColor colorWithRed:187/255.0f green:187/255.0f blue:187/255.0f alpha:1.0f];
-    
+        
     }
     
-  
+    
     
     
     
@@ -278,24 +268,21 @@
         case 0:
             
             break;
-         case 1:
+        case 1:
             [self addCircleWithFrame:cell.lblWeekDay.frame numberOfCircle:numberOfEvents onCell:cell];
             break;
         case 2:
-                        [self addCircleWithFrame:cell.lblWeekDay.frame numberOfCircle:numberOfEvents onCell:cell];
+            [self addCircleWithFrame:cell.lblWeekDay.frame numberOfCircle:numberOfEvents onCell:cell];
             break;
         case 3:
-                        [self addCircleWithFrame:cell.lblWeekDay.frame numberOfCircle:numberOfEvents onCell:cell];
+            [self addCircleWithFrame:cell.lblWeekDay.frame numberOfCircle:numberOfEvents onCell:cell];
             break;
             
         default:
-                        [self addCircleWithFrame:cell.lblWeekDay.frame numberOfCircle:3 onCell:cell];
+            [self addCircleWithFrame:cell.lblWeekDay.frame numberOfCircle:3 onCell:cell];
             break;
     }
-    NSLog(@"number of events %d",numberOfEvents);
-
     
-    NSLog(@"farame  %@  offset of frame ",NSStringFromCGRect(cell.frame));
     return cell;
     
     
@@ -318,31 +305,31 @@
     [dateComponenets setTimeZone:[NSTimeZone defaultTimeZone]];
     
     
-
+    
     
     NSDateComponents *components = [[NSDateComponents alloc] init];
     [components setHour:23];
     [components setMinute:59];
     [components setTimeZone:[NSTimeZone defaultTimeZone]];
-
+    
     
     // create a calendar
     
     
     NSDate *endDate = [gregorian dateByAddingComponents:components toDate:[gregorian dateFromComponents:dateComponenets] options:0];
-   
+    
     NSLog(@"print date %@ end date %@ datecomponetn ************ %@",[gregorian dateFromComponents:dateComponenets],endDate,dateComponenets);
-
+    
     NSPredicate *predicate = [del.eventStore predicateForEventsWithStartDate:[gregorian dateFromComponents:dateComponenets]
-                                                                 endDate:endDate
-                                                               calendars:nil];
+                                                                     endDate:endDate
+                                                                   calendars:nil];
     
     // Fetch all events that match the predicate
     NSArray *events = [del.eventStore eventsMatchingPredicate:predicate];
     
     
     return events.count;
-
+    
     
 }
 
@@ -360,26 +347,28 @@
 
 -(void)addCircleWithFrame:(CGRect)frame numberOfCircle:(NSInteger)count onCell:(LSCalCollectionCell*)cell
 {
-   NSInteger circleHeight=10;
+    NSInteger circleHeight=10;
     NSInteger circleWidth=10;
     NSInteger width=frame.size.width;
     NSInteger startXaxis=frame.origin.x+(width- count*circleWidth)/2;
     NSInteger startYaxis=frame.origin.y-13;
     
     while (count!=0) {
-       
-        CircleView *viewCirlce=[[CircleView alloc] initWithFrame:CGRectMake(startXaxis,startYaxis , circleWidth, circleHeight)];
+        
+        //  CircleView *viewCirlce=[[CircleView alloc] initWithFrame:CGRectMake(startXaxis,startYaxis , circleWidth, circleHeight)];
+        
+        CircleView *viewCirlce=[CircleView circleViewWithFrame:CGRectMake(startXaxis,startYaxis , circleWidth, circleHeight) andFillColor:APP_COLOR];
         
         [viewCirlce setBackgroundColor:[UIColor clearColor]];
         [cell.contentView addSubview:viewCirlce];
         count--;
-
+        
         startXaxis+=circleWidth;
         
     }
     
     
-
+    
 }
 
 - (BOOL)isSameDay:(NSDate*)date1 otherDay:(NSDate*)date2 {
@@ -404,6 +393,43 @@
     
     return  [comp1 month] == [comp2 month] &&
     [comp1 year]  == [comp2 year];
+}
+
+
+
+-(UIView *)roundCornersOnView:(UIView *)view onTopLeft:(BOOL)tl topRight:(BOOL)tr bottomLeft:(BOOL)bl bottomRight:(BOOL)br radius:(float)radius {
+    
+    if (tl || tr || bl || br) {
+        
+        UIRectCorner corner; //holds the corner
+        //Determine which corner(s) should be changed
+        if (tl) {
+            corner = UIRectCornerTopLeft;
+        }
+        if (tr) {
+            UIRectCorner add = corner | UIRectCornerTopRight;
+            corner = add;
+        }
+        if (bl) {
+            UIRectCorner add = corner | UIRectCornerBottomLeft;
+            corner = add;
+        }
+        if (br) {
+            UIRectCorner add = corner | UIRectCornerBottomRight;
+            corner = add;
+        }
+        
+        UIView *roundedView = view;
+        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:roundedView.bounds byRoundingCorners:corner cornerRadii:CGSizeMake(radius, radius)];
+        CAShapeLayer *maskLayer = [CAShapeLayer layer];
+        maskLayer.frame = roundedView.bounds;
+        maskLayer.path = maskPath.CGPath;
+        roundedView.layer.mask = maskLayer;
+        return roundedView;
+    } else {
+        return view;
+    }
+    
 }
 
 @end
