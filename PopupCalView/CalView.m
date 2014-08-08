@@ -202,8 +202,8 @@
         
     }
     
-    int selected=indexPath.row%7;
-    UILabel *lblWeekDay=[labels objectAtIndex:selected];
+   
+  
     
     
     
@@ -223,10 +223,11 @@
     
     
     
-    NSString *month=[[dateformatter monthSymbols] objectAtIndex:dC.month-1];
-    if (![lblLeftWeek.text isEqualToString:month]) {
+   // NSString *month=[[dateformatter monthSymbols] objectAtIndex:dC.month-1];
+    
+   // if (![lblLeftWeek.text isEqualToString:month]) {
         //  lblRightWeek.text=month;
-    }
+    //}
     cell.lblWeekDay.text=[[[dateformatter weekdaySymbols] objectAtIndex:dC.weekday-1] substringToIndex:3];
     cell.lblDay.text=[NSString stringWithFormat:@"%d",dC.day];
     [cell.lblDay setBackgroundColor:[UIColor clearColor]];

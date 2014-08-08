@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+
+
 @interface CalView : UIView<UICollectionViewDataSource,UICollectionViewDelegate>
 
 {
@@ -19,7 +21,6 @@
 
 
 
--(void)design;
 
 
 
