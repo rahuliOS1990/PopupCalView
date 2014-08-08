@@ -9,6 +9,7 @@
 #import "CalView.h"
 #import "AppDelegate.h"
 #import "CircleView.h"
+#import "LSCalCollectionCell.h"
 
 
 @interface CalView ()
@@ -108,14 +109,13 @@
     
 
     NSDateComponents *dateComponents = [gregorian components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit|NSWeekOfMonthCalendarUnit|NSWeekdayCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit) fromDate:date];
-    NSInteger month = [dateComponents month];
     
-    NSInteger week=[dateComponents weekOfMonth];
+   
     
     
     
     NSDateFormatter *df = [[NSDateFormatter alloc] init] ;
-    NSString *monthName = [[df monthSymbols] objectAtIndex:(month-1)];
+
     UIFont *fontMonth=[UIFont fontWithName:@"AvenirNext-Medium" size:15.0f];
     NSDictionary *attr = @{NSFontAttributeName: fontMonth};
     
@@ -125,7 +125,7 @@
     
     NSString *strday=[[df weekdaySymbols] objectAtIndex:(day-1)];
     
-    NSLog(@"week no, %d ster week %@",week,strday);
+   // NSLog(@"week no, %d ster week %@",week,strday);
     
     
     NSDateComponents *dateComponentStartWeek=[[NSDateComponents  alloc] init];
@@ -147,7 +147,14 @@
     
     strtDate=[gregorian dateFromComponents:dateComponentStartWeek];
     NSLog(@"date start %@ date end %@",[gregorian dateFromComponents:dateComponentStartWeek],[gregorian dateFromComponents:dateComponentEndWeek]);
- 
+    
+    NSDateComponents *dCForMonth=[gregorian components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit|NSWeekOfMonthCalendarUnit|NSWeekdayCalendarUnit) fromDate:strtDate];
+    
+     NSInteger week=[dCForMonth weekOfMonth];
+    NSInteger month = [dCForMonth month];
+    NSLog(@"start dateeee ******* %@   %@",dCForMonth,[gregorian dateFromComponents:dCForMonth]);
+    NSString *monthName = [[df monthSymbols] objectAtIndex:(month-1)];
+    lblLeftWeek.text=monthName;
     [collectionView reloadData];
 
     
@@ -181,13 +188,15 @@
     return 14;
     }
     else
+    {
         return 0;
+    }
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView1 cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier=@"CalViewCollectionCell";
-    UICollectionViewCell *cell=[collectionView1 dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+    LSCalCollectionCell *cell=[collectionView1 dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     
     if (cell==nil) {
         
@@ -208,15 +217,41 @@
     NSDateComponents *components = [[NSDateComponents alloc] init];
     [components setDay:indexPath.row];
     
-
+ NSDateFormatter *df = [[NSDateFormatter alloc] init] ;
     // create a calendar
 
     
     NSDate *newDate2 = [gregorian dateByAddingComponents:components toDate:strtDate options:0];
 
     dC=[gregorian components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit|NSWeekOfMonthCalendarUnit|NSWeekdayCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit) fromDate:newDate2];
-    UILabel *lbl=(UILabel*)[cell viewWithTag:110];
-    lbl.text=[NSString stringWithFormat:@"%d",dC.day];
+    
+    
+
+    NSString *month=[[df monthSymbols] objectAtIndex:dC.month-1];
+    if (![lblLeftWeek.text isEqualToString:month]) {
+        lblRightWeek.text=month;
+    }
+    cell.lblWeekDay.text=[[[df weekdaySymbols] objectAtIndex:dC.weekday-1] substringToIndex:3];
+    cell.lblDay.text=[NSString stringWithFormat:@"%d",dC.day];
+    
+    BOOL checkSameDay=[self isSameDay:[NSDate date] otherDay:newDate2];
+    if (checkSameDay) {
+        [cell.lblDay setBackgroundColor:[UIColor grayColor]];
+        cell.lblDay.textColor=[UIColor whiteColor];
+    }else
+    {
+        [cell.lblDay setBackgroundColor:[UIColor clearColor]];
+        cell.lblDay.textColor=[UIColor blackColor];
+    }
+    
+    
+    
+    
+    for (UIView *view in cell.contentView.subviews) {
+        if (![view isKindOfClass:NSClassFromString(@"UILabel")]) {
+            [view removeFromSuperview];
+        }
+    }
     
     
     NSInteger numberOfEvents=[self numberOfEventinCalendarOnDate:dC];
@@ -226,17 +261,17 @@
             
             break;
          case 1:
-            [self addCircleWithFrame:lblWeekDay.frame numberOfCircle:numberOfEvents];
+            [self addCircleWithFrame:cell.lblWeekDay.frame numberOfCircle:numberOfEvents onCell:cell];
             break;
         case 2:
-                        [self addCircleWithFrame:lblWeekDay.frame numberOfCircle:numberOfEvents];
+                        [self addCircleWithFrame:cell.lblWeekDay.frame numberOfCircle:numberOfEvents onCell:cell];
             break;
         case 3:
-                        [self addCircleWithFrame:lblWeekDay.frame numberOfCircle:numberOfEvents];
+                        [self addCircleWithFrame:cell.lblWeekDay.frame numberOfCircle:numberOfEvents onCell:cell];
             break;
             
         default:
-                        [self addCircleWithFrame:lblWeekDay.frame numberOfCircle:3];
+                        [self addCircleWithFrame:cell.lblWeekDay.frame numberOfCircle:3 onCell:cell];
             break;
     }
     NSLog(@"number of events %d",numberOfEvents);
@@ -260,30 +295,33 @@
     
     AppDelegate *del=(AppDelegate*)[[UIApplication sharedApplication] delegate];
     
-    [dateComponenets setHour:0];
+    [dateComponenets setHour:00];
+    [dateComponenets setMinute:1];
     [dateComponenets setTimeZone:[NSTimeZone defaultTimeZone]];
     
-    NSLog(@"print date %@",[gregorian dateFromComponents:dateComponenets]);
     
 
     
     NSDateComponents *components = [[NSDateComponents alloc] init];
     [components setHour:23];
     [components setMinute:59];
-    
+    [components setTimeZone:[NSTimeZone defaultTimeZone]];
+
     
     // create a calendar
     
     
     NSDate *endDate = [gregorian dateByAddingComponents:components toDate:[gregorian dateFromComponents:dateComponenets] options:0];
    
-    
+    NSLog(@"print date %@ end date %@ datecomponetn ************ %@",[gregorian dateFromComponents:dateComponenets],endDate,dateComponenets);
+
     NSPredicate *predicate = [del.eventStore predicateForEventsWithStartDate:[gregorian dateFromComponents:dateComponenets]
                                                                  endDate:endDate
                                                                calendars:nil];
     
     // Fetch all events that match the predicate
     NSArray *events = [del.eventStore eventsMatchingPredicate:predicate];
+    
     
     return events.count;
 
@@ -302,7 +340,7 @@
 
 #pragma mark- Add Circle
 
--(void)addCircleWithFrame:(CGRect)frame numberOfCircle:(NSInteger)count
+-(void)addCircleWithFrame:(CGRect)frame numberOfCircle:(NSInteger)count onCell:(LSCalCollectionCell*)cell
 {
    NSInteger circleHeight=10;
     NSInteger circleWidth=10;
@@ -315,7 +353,7 @@
         CircleView *viewCirlce=[[CircleView alloc] initWithFrame:CGRectMake(startXaxis,startYaxis , circleWidth, circleHeight)];
         
         [viewCirlce setBackgroundColor:[UIColor clearColor]];
-        [self addSubview:viewCirlce];
+        [cell.contentView addSubview:viewCirlce];
         count--;
 
         startXaxis+=circleWidth;
@@ -324,6 +362,18 @@
     
     
 
+}
+
+- (BOOL)isSameDay:(NSDate*)date1 otherDay:(NSDate*)date2 {
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    
+    unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
+    NSDateComponents* comp1 = [calendar components:unitFlags fromDate:date1];
+    NSDateComponents* comp2 = [calendar components:unitFlags fromDate:date2];
+    
+    return [comp1 day]   == [comp2 day] &&
+    [comp1 month] == [comp2 month] &&
+    [comp1 year]  == [comp2 year];
 }
 
 @end

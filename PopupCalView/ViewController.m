@@ -33,9 +33,9 @@
     CircleView *viewCirlce=[[CircleView alloc] initWithFrame:CGRectMake(100, 100, 10, 10)];
     
        [viewCirlce setBackgroundColor:[UIColor clearColor]];
-    [self.view addSubview:viewCirlce];
+   // [self.view addSubview:viewCirlce];
 
-    CalView *view=[[CalView alloc] initWithFrame:CGRectMake(10, 30, 100, 100)];
+    CalView *view=[[CalView alloc] initWithFrame:CGRectMake(10, 30,     371    , 300)];
    
     [view setBackgroundColor:[UIColor clearColor]];
    

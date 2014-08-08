@@ -27,6 +27,7 @@
 		9DBAB990199397A0009BCCFA /* CalCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DBAB98F199397A0009BCCFA /* CalCollectionCell.xib */; };
 		9DBAB99219939BF0009BCCFA /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DBAB99119939BF0009BCCFA /* Main_iPad.storyboard */; };
 		9DC2DA561994A2950074CCD7 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DC2DA551994A2950074CCD7 /* EventKit.framework */; };
+		9DC2DA5C1994BA690074CCD7 /* LSCalCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC2DA5B1994BA690074CCD7 /* LSCalCollectionCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,8 @@
 		9DBAB98F199397A0009BCCFA /* CalCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalCollectionCell.xib; sourceTree = "<group>"; };
 		9DBAB99119939BF0009BCCFA /* Main_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPad.storyboard; sourceTree = "<group>"; };
 		9DC2DA551994A2950074CCD7 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		9DC2DA5A1994BA690074CCD7 /* LSCalCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSCalCollectionCell.h; sourceTree = "<group>"; };
+		9DC2DA5B1994BA690074CCD7 /* LSCalCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSCalCollectionCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +100,8 @@
 		9D6F451E199361C200008A86 = {
 			isa = PBXGroup;
 			children = (
+				9DC2DA5A1994BA690074CCD7 /* LSCalCollectionCell.h */,
+				9DC2DA5B1994BA690074CCD7 /* LSCalCollectionCell.m */,
 				9DBAB98F199397A0009BCCFA /* CalCollectionCell.xib */,
 				9D6F4530199361C200008A86 /* PopupCalView */,
 				9D6F454F199361C200008A86 /* PopupCalViewTests */,
@@ -278,6 +283,7 @@
 				9DBAB989199363D6009BCCFA /* CircleView.m in Sources */,
 				9DBAB98C19937291009BCCFA /* CalView.m in Sources */,
 				9D6F4541199361C200008A86 /* ViewController.m in Sources */,
+				9DC2DA5C1994BA690074CCD7 /* LSCalCollectionCell.m in Sources */,
 				9D6F453B199361C200008A86 /* AppDelegate.m in Sources */,
 				9D6F4537199361C200008A86 /* main.m in Sources */,
 			);
@@ -406,11 +412,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Rahul Sharma (7375JZ6P6D)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rahul Sharma (7375JZ6P6D)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PopupCalView/PopupCalView-Prefix.pch";
 				INFOPLIST_FILE = "PopupCalView/PopupCalView-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "E613DB4F-F0C7-470C-9032-6F4B9A7C09B8";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -421,11 +430,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Rahul Sharma (7375JZ6P6D)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rahul Sharma (7375JZ6P6D)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PopupCalView/PopupCalView-Prefix.pch";
 				INFOPLIST_FILE = "PopupCalView/PopupCalView-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "E613DB4F-F0C7-470C-9032-6F4B9A7C09B8";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};

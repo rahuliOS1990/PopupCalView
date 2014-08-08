@@ -14,6 +14,8 @@
  IBOutlet   UICollectionView *collectionView;
     IBOutletCollection(UILabel) NSArray *labels;
     
+    IBOutlet UILabel *lblLeftWeek;
+    IBOutlet UILabel *lblRightWeek;
 }
 
 
