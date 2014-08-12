@@ -51,7 +51,7 @@
     LSAlert *alert=[[LSAlert alloc] init];
     alert.date=[NSDate date];
     
-        NSDateComponents *dateComponents = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit|NSWeekOfMonthCalendarUnit|NSWeekdayCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit) fromDate:alert.date];
+    NSDateComponents *dateComponents = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit|NSWeekOfMonthCalendarUnit|NSWeekdayCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit) fromDate:alert.date];
     dateComponents.day=1;
     
     LSAlert *alert1=[[LSAlert alloc] init];
