@@ -7,14 +7,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CalViewCollectionCell" id="UlE-ek-sVE" customClass="LSCalCollectionCell">
-            <rect key="frame" x="0.0" y="0.0" width="42" height="88"/>
+            <rect key="frame" x="0.0" y="0.0" width="40" height="88"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="42" height="88"/>
+                <rect key="frame" x="0.0" y="0.0" width="40" height="88"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="110" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="01" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nk9-p9-zxj">
-                        <rect key="frame" x="2" y="56" width="38" height="26"/>
+                        <rect key="frame" x="1" y="52" width="38" height="35"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="25"/>
                         <nil key="highlightedColor"/>
@@ -28,7 +28,7 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
-            <size key="customSize" width="177" height="106"/>
+            <size key="customSize" width="175" height="106"/>
             <connections>
                 <outlet property="lblDay" destination="nk9-p9-zxj" id="gay-gO-SDJ"/>
                 <outlet property="lblWeekDay" destination="3JR-e6-ce8" id="R5J-Gf-GI5"/>

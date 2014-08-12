@@ -12,7 +12,7 @@
 #import "AppDelegate.h"
 #import "CircleView.h"
 #import "LSCalCollectionCell.h"
-
+#import "LSAlert.h"
 
 @interface CalView ()
 {
@@ -67,6 +67,7 @@
     NSDateComponents *dateComponents = [gregorian components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit|NSWeekOfMonthCalendarUnit|NSWeekdayCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit) fromDate:date];
     
     _arrEvents=[self.datasource alertArrayForCalWeekView];
+    
     
     
     
@@ -126,10 +127,12 @@
     
     
     monthName=[[dateformatter monthSymbols] objectAtIndex:dateComponents.month-1];
-    if ([lblLeftWeek.text isEqualToString:monthName]) {
+    
+    if ([lblLeftWeek.text isEqualToString:monthName.uppercaseString]) {
         
         [lblLeftWeek setBackgroundColor:[UIColor colorWithRed:153/255.0f green:204/255.0f blue:0/255.0f alpha:1.0f]];
         [lblRightWeek setBackgroundColor:[UIColor lightGrayColor]];
+        [lblRightWeek setHidden:YES];
         
     }
     else
@@ -247,8 +250,24 @@
         }
     }
     
+    NSMutableArray *arrEventOnthisDate=[[NSMutableArray alloc] init];
     
+    for (LSAlert *alert in _arrEvents) {
+        if ([self isSameDay:alert.date otherDay:newDate2]) {
+            [arrEventOnthisDate addObject:alert];
+        }
+    }
+    
+    
+    
+    
+    /*
+     This is for number of events in Calendar on this date
+     
     NSInteger numberOfEvents=[self numberOfEventinCalendarOnDate:dC];
+     */
+   
+    NSInteger numberOfEvents=arrEventOnthisDate.count;
     
     switch (numberOfEvents) {
         case 0:
@@ -268,6 +287,11 @@
             [self addCircleWithFrame:cell.lblWeekDay.frame numberOfCircle:3 onCell:cell];
             break;
     }
+    
+    
+  
+    
+    
     
     return cell;
     
@@ -329,6 +353,7 @@
 }
 
 
+
 #pragma mark- Add Circle
 
 -(void)addCircleWithFrame:(CGRect)frame numberOfCircle:(NSInteger)count onCell:(LSCalCollectionCell*)cell
@@ -356,6 +381,9 @@
     
     
 }
+
+
+
 
 - (BOOL)isSameDay:(NSDate*)date1 otherDay:(NSDate*)date2 {
     NSCalendar* calendar = [NSCalendar currentCalendar];
