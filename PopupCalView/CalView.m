@@ -127,12 +127,15 @@
     
     
     monthName=[[dateformatter monthSymbols] objectAtIndex:dateComponents.month-1];
+    if ([lblRightWeek.text isEqualToString:lblLeftWeek.text]) {
+        [lblRightWeek setHidden:YES];
+    }
     
     if ([lblLeftWeek.text isEqualToString:monthName.uppercaseString]) {
         
         [lblLeftWeek setBackgroundColor:[UIColor colorWithRed:153/255.0f green:204/255.0f blue:0/255.0f alpha:1.0f]];
         [lblRightWeek setBackgroundColor:[UIColor lightGrayColor]];
-        [lblRightWeek setHidden:YES];
+        
         
     }
     else
