@@ -68,6 +68,7 @@
     
     _arrEvents=[self.datasource alertArrayForCalWeekView];
     
+
     
     
     
@@ -221,7 +222,6 @@
     cell.lblDay.text=[NSString stringWithFormat:@"%d",dC.day];
     [cell.lblDay setBackgroundColor:[UIColor clearColor]];
     
-    NSLog(@"print alerts %@",_arrEvents);
     
     cell.lblDay.textColor=[UIColor whiteColor];
     
@@ -253,13 +253,34 @@
         }
     }
     
-    NSMutableArray *arrEventOnthisDate=[[NSMutableArray alloc] init];
+    NSArray *arrEventOnthisDate; //=[[NSMutableArray alloc] init];
     
+    /*
     for (LSAlert *alert in _arrEvents) {
         if ([self isSameDay:alert.date otherDay:newDate2]) {
             [arrEventOnthisDate addObject:alert];
         }
     }
+    */
+    
+    NSDateComponents *componentsToAdd = [[NSDateComponents alloc] init];
+    [componentsToAdd setHour:23];
+    [componentsToAdd setMinute:59];
+    [componentsToAdd setTimeZone:[NSTimeZone defaultTimeZone]];
+    
+    
+   
+    
+    
+    NSDate *endDate = [gregorian dateByAddingComponents:componentsToAdd toDate:newDate2 options:0];
+    
+    
+    NSPredicate *predicate=[NSPredicate
+                  predicateWithFormat:@"date >= %@ AND date <= %@"
+                  , newDate2
+                            , endDate];
+    
+    arrEventOnthisDate=[_arrEvents filteredArrayUsingPredicate:predicate];
     
     
     

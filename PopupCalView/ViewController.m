@@ -31,14 +31,15 @@
 
     
     
-    CircleView *viewCirlce=[[CircleView alloc] initWithFrame:CGRectMake(100, 100, 10, 10)];
+   CircleView *viewCirlce=[[CircleView alloc] initWithFrame:CGRectMake(100, 100, 10, 10)];
     
-       [viewCirlce setBackgroundColor:[UIColor clearColor]];
+   [viewCirlce setBackgroundColor:[UIColor clearColor]];
+    
    // [self.view addSubview:viewCirlce];
 
+    
     CalView *view=[[CalView alloc] initWithFrame:CGRectMake(110, 130,370, 300)];
-   
-    [view setBackgroundColor:[UIColor darkGrayColor]];
+   [view setBackgroundColor:[UIColor darkGrayColor]];
     view.datasource=self;
     // [view design];
     [self.view addSubview:view];
@@ -52,7 +53,7 @@
     alert.date=[NSDate date];
     
     NSDateComponents *dateComponents = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit|NSWeekOfMonthCalendarUnit|NSWeekdayCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit) fromDate:alert.date];
-    dateComponents.day=1;
+    dateComponents.day=15;
     
     LSAlert *alert1=[[LSAlert alloc] init];
     alert1.date=[[NSCalendar currentCalendar] dateFromComponents:dateComponents];

@@ -10,4 +10,11 @@
 
 @implementation LSAlert
 
+
+
+-(NSString *)description
+{
+
+    return [NSString stringWithFormat:@"%@", _date];
+}
 @end
