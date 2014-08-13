@@ -272,13 +272,13 @@
    
     
     
-    NSDate *endDate = [gregorian dateByAddingComponents:componentsToAdd toDate:newDate2 options:0];
+    NSDate *rangeEndDate = [gregorian dateByAddingComponents:componentsToAdd toDate:newDate2 options:0];
     
     
     NSPredicate *predicate=[NSPredicate
                   predicateWithFormat:@"date >= %@ AND date <= %@"
                   , newDate2
-                            , endDate];
+                            , rangeEndDate];
     
     arrEventOnthisDate=[_arrEvents filteredArrayUsingPredicate:predicate];
     
